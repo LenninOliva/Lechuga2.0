@@ -4,55 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Procesador de Reportes de Laboratorio</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        #contenedor {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+        }
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #resultado {
+            margin-top: 20px;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Procesador de Reportes de Laboratorio</h1>
-        
-        <!-- Área para pegar texto -->
-        <textarea id="text-input" placeholder="Pega aquí el texto del reporte"></textarea>
-        <button onclick="processText()">Procesar</button>
-
-        <hr>
-
-        <!-- Área para subir un PDF -->
-        <input type="file" id="pdf-input" accept="application/pdf">
-        <button onclick="uploadPDF()">Subir y Procesar PDF</button>
-
-        <hr>
-
-        <!-- Resultado -->
-        <h2>Resultado:</h2>
-        <p id="output"></p>
+    <div id="contenedor">
+        <h2>Procesador de Reportes de Laboratorio</h2>
+        <textarea id="entrada" placeholder="Pega aquí el reporte de laboratorio..."></textarea>
+        <br>
+        <button onclick="procesarTexto()">Procesar</button>
+        <h3>Resultado:</h3>
+        <div id="resultado"></div>
     </div>
 
     <script>
-        function processText() {
-            let text = document.getElementById("text-input").value;
-            fetch('/process_text', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ text: text })
-            })
-            .then(response => response.json())
-            .then(data => document.getElementById("output").innerText = data.result)
-            .catch(error => console.error("Error:", error));
+        function procesarTexto() {
+            let texto = document.getElementById("entrada").value;
+            let resultado = extraerValores(texto);
+            document.getElementById("resultado").innerText = resultado;
         }
 
-        function uploadPDF() {
-            let fileInput = document.getElementById("pdf-input");
-            let file = fileInput.files[0];
-            let formData = new FormData();
-            formData.append("file", file);
-
-            fetch('/process_pdf', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => document.getElementById("output").innerText = data.result)
-            .catch(error => console.error("Error:", error));
+        function extraerValores(texto) {
+            let patrones = {
+                "Glucosa": /Glucosa[:\s]*([\d.]+)/i,
+                "Urea": /Urea[:\s]*([\d.]+)/i,
+                "Creatinina": /Creatinina[:\s]*([\d.]+)/i,
+                "Hemoglobina": /Hemoglobina[:\s]*([\d.]+)/i,
+            };
+            
+            let resultado = "";
+            for (let clave in patrones) {
+                let match = texto.match(patrones[clave]);
+                if (match) {
+                    resultado += `${clave}: ${match[1]}\n`;
+                }
+            }
+            return resultado || "No se encontraron valores clave";
         }
     </script>
 </body>
