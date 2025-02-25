@@ -60,10 +60,17 @@
 
         function extraerValores(texto) {
             let patrones = {
-                "Glucosa": /Glucosa[:\s]*([\d.]+)/i,
-                "Urea": /Urea[:\s]*([\d.]+)/i,
-                "Creatinina": /Creatinina[:\s]*([\d.]+)/i,
-                "Hemoglobina": /Hemoglobina[:\s]*([\d.]+)/i,
+                "Eritrocitos": /ERITROCITOS.*?(\d+[.,]?\d*)/i,
+                "Hemoglobina": /HEMOGLOBINA.*?(\d+[.,]?\d*)/i,
+                "Hematocrito": /HEMATOCRITO.*?(\d+[.,]?\d*)/i,
+                "Leucocitos": /LEUCOCITOS.*?(\d+[.,]?\d*)/i,
+                "Glucosa": /GLUCOSA.*?(\d+[.,]?\d*)/i,
+                "Creatinina": /CREATININA.*?(\d+[.,]?\d*)/i,
+                "Sodio": /SODIO.*?(\d+[.,]?\d*)/i,
+                "Potasio": /POTASIO.*?(\d+[.,]?\d*)/i,
+                "Cloro": /CLORO.*?(\d+[.,]?\d*)/i,
+                "Urea": /UREA.*?(\d+[.,]?\d*)/i,
+                "BUN": /BUN.*?(\d+[.,]?\d*)/i,
             };
             
             let resultado = "";
