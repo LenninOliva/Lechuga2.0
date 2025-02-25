@@ -1,0 +1,7 @@
+/lab-parser  
+│── /static        # Archivos estáticos (CSS, imágenes)  
+│── /templates     # Páginas HTML  
+│── app.py         # Backend con Flask  
+│── parser.py      # Lógica de extracción de datos  
+│── requirements.txt  # Dependencias  
+│── README.md      # Explicación del proyecto  
