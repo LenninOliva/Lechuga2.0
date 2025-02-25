@@ -1,7 +1,59 @@
-/lab-parser  
-│── /static        # Archivos estáticos (CSS, imágenes)  
-│── /templates     # Páginas HTML  
-│── app.py         # Backend con Flask  
-│── parser.py      # Lógica de extracción de datos  
-│── requirements.txt  # Dependencias  
-│── README.md      # Explicación del proyecto  
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procesador de Reportes de Laboratorio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Procesador de Reportes de Laboratorio</h1>
+        
+        <!-- Área para pegar texto -->
+        <textarea id="text-input" placeholder="Pega aquí el texto del reporte"></textarea>
+        <button onclick="processText()">Procesar</button>
+
+        <hr>
+
+        <!-- Área para subir un PDF -->
+        <input type="file" id="pdf-input" accept="application/pdf">
+        <button onclick="uploadPDF()">Subir y Procesar PDF</button>
+
+        <hr>
+
+        <!-- Resultado -->
+        <h2>Resultado:</h2>
+        <p id="output"></p>
+    </div>
+
+    <script>
+        function processText() {
+            let text = document.getElementById("text-input").value;
+            fetch('/process_text', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ text: text })
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("output").innerText = data.result)
+            .catch(error => console.error("Error:", error));
+        }
+
+        function uploadPDF() {
+            let fileInput = document.getElementById("pdf-input");
+            let file = fileInput.files[0];
+            let formData = new FormData();
+            formData.append("file", file);
+
+            fetch('/process_pdf', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("output").innerText = data.result)
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
