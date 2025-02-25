@@ -64,12 +64,13 @@
                 "Hemoglobina": /HEMOGLOBINA\s*[.:]+\s*(\d+[.,]?\d*)/i,
                 "Hematocrito": /HEMATOCRITO\s*[.:]+\s*(\d+[.,]?\d*)/i,
                 "Leucocitos": /LEUCOCITOS\s*[.:]+\s*(\d+[.,]?\d*)/i,
+                "Plaquetas": /PLAQUETAS\s*[.:]+\s*(\d+[.,]?\d*)/i,
                 "Glucosa": /GLUCOSA\s*[.:]+\s*(\d+[.,]?\d*)/i,
                 "Creatinina": /CREATININA\s*[.:]+\s*(\d+[.,]?\d*)/i,
                 "Sodio": /SODIO\s*[.:]+\s*(\d+[.,]?\d*)/i,
                 "Potasio": /POTASIO\s*[.:]+\s*(\d+[.,]?\d*)/i,
                 "Cloro": /CLORO\s*[.:]+\s*(\d+[.,]?\d*)/i,
-                "Urea": /UREA\s*[.:]+\s*(\d+[.,]?\d*)/i,
+                "Urea": /UREA(?!\s*BUN)\s*[.:]+\s*(\d+[.,]?\d*)/i,
                 "BUN": /BUN\s*[.:]+\s*(\d+[.,]?\d*)/i
             };
             
