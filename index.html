@@ -60,28 +60,27 @@
 
         function extraerValores(texto) {
             let patrones = {
-                "Eritrocitos": /ERITROCITOS\s*[:.]?\s*(\d+[.,]?\d*)/i,
-                "Hemoglobina": /HEMOGLOBINA\s*[:.]?\s*(\d+[.,]?\d*)/i,
-                "Hematocrito": /HEMATOCRITO\s*[:.]?\s*(\d+[.,]?\d*)/i,
-                "Leucocitos": /LEUCOCITOS\s*[:.]?\s*(\d+[.,]?\d*)/i,
-                "Plaquetas": /PLAQUETAS\s*[:.]?\s*(\d+[.,]?\d*)/i,
-                "Glucosa": /GLUCOSA\s*[:.]?\s*(\d+[.,]?\d*)/i,
-                "Creatinina": /CREATININA\s*[:.]?\s*(\d+[.,]?\d*)/i,
-                "Sodio": /SODIO\s*[:.]?\s*(\d+[.,]?\d*)/i,
-                "Potasio": /POTASIO\s*[:.]?\s*(\d+[.,]?\d*)/i,
-                "Cloro": /CLORO\s*[:.]?\s*(\d+[.,]?\d*)/i,
-                "Urea": /\bUREA\s*[:.]?\s*(\d+[.,]?\d*)\b(?!.*BUN)/i,
-                "BUN": /BUN\s*[:.]?\s*(\d+[.,]?\d*)/i
+                "ERI": /ERITROCITOS\D*(\d+[.,]?\d*)/i,
+                "HB": /HEMOGLOBINA\D*(\d+[.,]?\d*)/i,
+                "HTO": /HEMATOCRITO\D*(\d+[.,]?\d*)/i,
+                "LEU": /LEUCOCITOS\D*(\d+[.,]?\d*)/i,
+                "PLA": /PLAQUETAS\D*(\d+[.,]?\d*)/i,
+                "GLU": /GLUCOSA\D*(\d+[.,]?\d*)/i,
+                "CREA": /CREATININA\D*(\d+[.,]?\d*)/i,
+                "Sodio": /SODIO\s*[.:]?\s*(\d{2,3}[.,]?\d*)/i,
+                "Potasio": /POTASIO\s*[.:]?\s*(\d{1,2}[.,]?\d*)/i,
+                "Cloro": /CLORO\s*[.:]?\s*(\d{2,3}[.,]?\d*)/i,
+                "UREA": /\bUREA\D*(\d+[.,]?\d*)\b(?!.*BUN)/i
             };
             
-            let resultado = "";
+            let resultado = [];
             for (let clave in patrones) {
                 let match = texto.match(patrones[clave]);
                 if (match) {
-                    resultado += `${clave}: ${match[1].replace(',', '.')}\n`;
+                    resultado.push(`${clave}: ${match[1].replace(',', '.')}`);
                 }
             }
-            return resultado || "No se encontraron valores clave";
+            return resultado.length > 0 ? resultado.join(" | ") : "No se encontraron valores clave";
         }
     </script>
 </body>
