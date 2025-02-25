@@ -70,7 +70,7 @@
                 "Sodio": /SODIO\s*[.:]+\s*(\d+[.,]?\d*)/i,
                 "Potasio": /POTASIO\s*[.:]+\s*(\d+[.,]?\d*)/i,
                 "Cloro": /CLORO\s*[.:]+\s*(\d+[.,]?\d*)/i,
-                "Urea": /UREA(?!\s*BUN)\s*[.:]+\s*(\d+[.,]?\d*)/i,
+                "Urea": /UREA\s*[.:]+\s*(\d+[.,]?\d*)(?!\s*BUN)/i,
                 "BUN": /BUN\s*[.:]+\s*(\d+[.,]?\d*)/i
             };
             
@@ -78,7 +78,7 @@
             for (let clave in patrones) {
                 let match = texto.match(patrones[clave]);
                 if (match) {
-                    resultado += `${clave}: ${match[1]}\n`;
+                    resultado += `${clave}: ${match[1].replace(',', '.')}\n`;
                 }
             }
             return resultado || "No se encontraron valores clave";
