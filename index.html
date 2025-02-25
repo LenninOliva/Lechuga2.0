@@ -60,18 +60,18 @@
 
         function extraerValores(texto) {
             let patrones = {
-                "Eritrocitos": /ERITROCITOS\s*[.:]+\s*(\d+[.,]?\d*)/i,
-                "Hemoglobina": /HEMOGLOBINA\s*[.:]+\s*(\d+[.,]?\d*)/i,
-                "Hematocrito": /HEMATOCRITO\s*[.:]+\s*(\d+[.,]?\d*)/i,
-                "Leucocitos": /LEUCOCITOS\s*[.:]+\s*(\d+[.,]?\d*)/i,
-                "Plaquetas": /PLAQUETAS\s*[.:]+\s*(\d+[.,]?\d*)/i,
-                "Glucosa": /GLUCOSA\s*[.:]+\s*(\d+[.,]?\d*)/i,
-                "Creatinina": /CREATININA\s*[.:]+\s*(\d+[.,]?\d*)/i,
-                "Sodio": /SODIO\s*[.:]+\s*(\d+[.,]?\d*)/i,
-                "Potasio": /POTASIO\s*[.:]+\s*(\d+[.,]?\d*)/i,
-                "Cloro": /CLORO\s*[.:]+\s*(\d+[.,]?\d*)/i,
-                "Urea": /UREA\s*[.:]+\s*(\d+[.,]?\d*)(?!\s*BUN)/i,
-                "BUN": /BUN\s*[.:]+\s*(\d+[.,]?\d*)/i
+                "Eritrocitos": /ERITROCITOS\s*[:.]?\s*(\d+[.,]?\d*)/i,
+                "Hemoglobina": /HEMOGLOBINA\s*[:.]?\s*(\d+[.,]?\d*)/i,
+                "Hematocrito": /HEMATOCRITO\s*[:.]?\s*(\d+[.,]?\d*)/i,
+                "Leucocitos": /LEUCOCITOS\s*[:.]?\s*(\d+[.,]?\d*)/i,
+                "Plaquetas": /PLAQUETAS\s*[:.]?\s*(\d+[.,]?\d*)/i,
+                "Glucosa": /GLUCOSA\s*[:.]?\s*(\d+[.,]?\d*)/i,
+                "Creatinina": /CREATININA\s*[:.]?\s*(\d+[.,]?\d*)/i,
+                "Sodio": /SODIO\s*[:.]?\s*(\d+[.,]?\d*)/i,
+                "Potasio": /POTASIO\s*[:.]?\s*(\d+[.,]?\d*)/i,
+                "Cloro": /CLORO\s*[:.]?\s*(\d+[.,]?\d*)/i,
+                "Urea": /\bUREA\s*[:.]?\s*(\d+[.,]?\d*)\b(?!.*BUN)/i,
+                "BUN": /BUN\s*[:.]?\s*(\d+[.,]?\d*)/i
             };
             
             let resultado = "";
