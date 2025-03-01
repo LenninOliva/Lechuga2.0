@@ -167,15 +167,26 @@
             { nombre: "SALOMON.TRUJILLO", contrasena: "FRANCO2024" }
         ];
 
+        // Variable para almacenar el índice del usuario seleccionado
+        let usuarioSeleccionadoIndex = -1;
+
         // Función para mostrar la lista de usuarios
         function mostrarUsuarios() {
             const listaUsuarios = document.getElementById("lista-usuarios");
-            listaUsuarios.innerHTML = usuarios.map(usuario => `
-                <div>
+            listaUsuarios.innerHTML = usuarios.map((usuario, index) => `
+                <div onclick="seleccionarUsuario(${index})">
                     <strong>${usuario.nombre}</strong><br>
                     <small>${usuario.contrasena}</small>
                 </div>
             `).join("");
+        }
+
+        // Función para seleccionar un usuario
+        function seleccionarUsuario(index) {
+            usuarioSeleccionadoIndex = index;
+            const usuario = usuarios[index];
+            document.getElementById("nuevo-usuario").value = usuario.nombre;
+            document.getElementById("nueva-contrasena").value = usuario.contrasena;
         }
 
         // Función para buscar usuarios
@@ -186,8 +197,8 @@
                 usuario.contrasena.toLowerCase().includes(busqueda)
             );
             const listaUsuarios = document.getElementById("lista-usuarios");
-            listaUsuarios.innerHTML = usuariosFiltrados.map(usuario => `
-                <div>
+            listaUsuarios.innerHTML = usuariosFiltrados.map((usuario, index) => `
+                <div onclick="seleccionarUsuario(${index})">
                     <strong>${usuario.nombre}</strong><br>
                     <small>${usuario.contrasena}</small>
                 </div>
@@ -212,16 +223,12 @@
         function modificarUsuario() {
             const nuevoUsuario = document.getElementById("nuevo-usuario").value.trim();
             const nuevaContrasena = document.getElementById("nueva-contrasena").value.trim();
-            const usuarioSeleccionado = document.querySelector("#lista-usuarios div:hover");
-            if (usuarioSeleccionado && nuevoUsuario && nuevaContrasena) {
-                const nombreSeleccionado = usuarioSeleccionado.querySelector("strong").textContent;
-                const index = usuarios.findIndex(usuario => usuario.nombre === nombreSeleccionado);
-                if (index !== -1) {
-                    usuarios[index] = { nombre: nuevoUsuario, contrasena: nuevaContrasena };
-                    mostrarUsuarios();
-                    document.getElementById("nuevo-usuario").value = ""; // Limpiar el campo
-                    document.getElementById("nueva-contrasena").value = ""; // Limpiar el campo
-                }
+            if (usuarioSeleccionadoIndex !== -1 && nuevoUsuario && nuevaContrasena) {
+                usuarios[usuarioSeleccionadoIndex] = { nombre: nuevoUsuario, contrasena: nuevaContrasena };
+                mostrarUsuarios();
+                document.getElementById("nuevo-usuario").value = ""; // Limpiar el campo
+                document.getElementById("nueva-contrasena").value = ""; // Limpiar el campo
+                usuarioSeleccionadoIndex = -1; // Reiniciar la selección
             } else {
                 alert("Selecciona un usuario y completa ambos campos.");
             }
