@@ -70,7 +70,26 @@
                 "Sodio": /SODIO\s*[.:]?\s*(\d{2,3}[.,]?\d*)/i,
                 "Potasio": /POTASIO\s*[.:]?\s*(\d{1,2}[.,]?\d*)/i,
                 "Cloro": /CLORO\s*[.:]?\s*(\d{2,3}[.,]?\d*)/i,
-                "UREA": /\bUREA\D*(\d+[.,]?\d*)\b(?!.*BUN)/i
+                "UREA": /\bUREA\D*(\d+[.,]?\d*)\b(?!.*BUN)/i,
+                "ALB": /ALBUMINA\D*(\d+[.,]?\d*)/i,
+                "AUR": /ACIDO[\s-]*URICO\D*(\d+[.,]?\d*)/i,
+                "ALT": /ALANINA[\s-]*AMINOTRANSFERASA\D*(\d+[.,]?\d*)/i,
+                "LDH": /DESHIDROGENASA[\s-]*LACTICA\D*(\d+[.,]?\d*)/i,
+                "FA": /FOSFATASA[\s-]*ALCALINA\D*(\d+[.,]?\d*)/i,
+                "BT": /BILIRRUBINA[\s-]*TOTAL\D*(\d+[.,]?\d*)/i,
+                "COL": /COLESTEROL\D*(\d+[.,]?\d*)/i,
+                "TRIG": /TRIGLICERIDOS\D*(\d+[.,]?\d*)/i,
+                "TGO": /AST\/TGO\D*(\d+[.,]?\d*)/i,
+                "TPT": /TIEMPO[\s-]*DE[\s-]*TROMBOPLASTINA[\s-]*PARCIAL\D*(\d+[.,]?\d*)/i,
+                "TP": /TP\D*(\d+[.,]?\d*)/i,
+                "INR": /INR\D*(\d+[.,]?\d*)/i,
+                "DENS": /DENSIDAD\D*(\d+[.,]?\d*)/i,
+                "PH": /PH\D*(\d+[.,]?\d*)/i,
+                "ESTER": /ESTERASA[\s-]*LEUCOCITARIA\D*(\w+)/i,
+                "URO_LEU": /LEUCOCITOS\D*(\d+[.,]?\d*)/i,
+                "BACT": /BACTERIAS\D*(NEGATIVO|ESCASO|MODERADO|ABUNDANTE)/i,
+                "CEL": /CELULAS[\s-]*EPITELIALES\D*(NEGATIVO|ESCASO|MODERADO|ABUNDANTE)/i,
+                "MUC": /FILAMENTO[\s-]*MUCOSO\D*(NEGATIVO|ESCASO|MODERADO|ABUNDANTE)/i
             };
             
             let resultado = [];
