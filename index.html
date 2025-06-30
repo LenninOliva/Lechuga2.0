@@ -1,33 +1,5 @@
 
-        // Guardiometro
-        const guardias = ["C", "D", "A", "B"]; // La guardia C es la primera
-        const fechaInicio = new Date("2025-03-01"); // Fecha de inicio (01.03.2025)
-        const fechaFin = new Date("2025-07-01"); // Fecha de término (01.07.2025)
-        const hoy = new Date(); // Fecha actual
-
-        // Calcular la guardia actual y las guardias restantes
-        function calcularGuardia() {
-            const diasTotales = Math.floor((fechaFin - fechaInicio) / (1000 * 60 * 60 * 24)); // Días totales
-            const diasTranscurridos = Math.floor((hoy - fechaInicio) / (1000 * 60 * 60 * 24)); // Días transcurridos
-Dr. Papito fuera
-            // Calcular la guardia actual
-            const indiceGuardia = diasTranscurridos % guardias.length;
-            const guardiaActual = guardias[indiceGuardia];
-
-            // Calcular las guardias restantes para cada tipo de guardia
-            const guardiasRestantesA = Math.ceil((diasTotales - diasTranscurridos - 2) / 4); // A ocurre cada 4 días, empezando 2 días después de C
-            const guardiasRestantesB = Math.ceil((diasTotales - diasTranscurridos - 3) / 4); // B ocurre cada 4 días, empezando 3 días después de C
-            const guardiasRestantesC = Math.ceil((diasTotales - diasTranscurridos) / 4); // C ocurre cada 4 días
-            const guardiasRestantesD = Math.ceil((diasTotales - diasTranscurridos - 1) / 4); // D ocurre cada 4 días, empezando 1 día después de C
-
-            // Mostrar la información
-            document.getElementById("guardia-actual").textContent = guardiaActual;
-            document.getElementById("guardias-restantes-A").textContent = guardiasRestantesA;
-            document.getElementById("guardias-restantes-B").textContent = guardiasRestantesB;
-            document.getElementById("guardias-restantes-C").textContent = guardiasRestantesC;
-            document.getElementById("guardias-restantes-D").textContent = guardiasRestantesD;
-        }
-
+Regalo de Dr. Papito
         // Llamar a la función para calcular la guardia
         calcularGuardia();
     </script>
